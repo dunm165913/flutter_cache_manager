@@ -34,7 +34,9 @@ class HttpFileService extends FileService {
     if (headers != null) {
       req.headers.addAll(headers);
     }
-    final httpResponse = await _httpClient.send(req);
+    var client = http.Client();
+    final httpResponse = await client.send(req);
+    client.close();
 
     return HttpGetResponse(httpResponse);
   }
